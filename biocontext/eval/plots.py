@@ -46,13 +46,13 @@ def plot_overall_bars(raw: pd.DataFrame, out_dir: Path) -> None:
 
     axes[0].bar(labels, summary["mean_error"], color=colors)
     axes[0].set_ylabel("Mean localization error (px)")
-    axes[0].set_title("Mean error - lower is better")
+    axes[0].set_title("Mean error")
     for i, v in enumerate(summary["mean_error"]):
         axes[0].text(i, v, f"{v:.0f}", ha="center", va="bottom", fontsize=9)
 
     axes[1].bar(labels, summary["success_rate"] * 100, color=colors)
     axes[1].set_ylabel("Success rate (%) @ 15px")
-    axes[1].set_title("Success rate - higher is better")
+    axes[1].set_title("Success rate")
     axes[1].set_ylim(0, 100)
     for i, v in enumerate(summary["success_rate"] * 100):
         axes[1].text(i, v, f"{v:.0f}%", ha="center", va="bottom", fontsize=9)
@@ -128,7 +128,7 @@ def plot_runtime(raw: pd.DataFrame, out_dir: Path) -> None:
 def plot_error_distribution(raw: pd.DataFrame, out_dir: Path) -> None:
     fig, ax = plt.subplots(figsize=(8, 5))
     data = [raw[raw["method"] == m]["error_px"].clip(upper=500) for m in METHOD_ORDER]
-    bp = ax.boxplot(data, labels=[METHOD_LABELS[m].replace("\n", " ") for m in METHOD_ORDER],
+    bp = ax.boxplot(data, tick_labels=[METHOD_LABELS[m].replace("\n", " ") for m in METHOD_ORDER],
                      patch_artist=True, showfliers=False)
     for patch, m in zip(bp["boxes"], METHOD_ORDER):
         patch.set_facecolor(METHOD_COLORS[m])
