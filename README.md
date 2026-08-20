@@ -107,14 +107,13 @@ biocontext/
     plots.py                 generates comparison figures from the CSVs
   viz/visualize.py         candidate / false-match / final-selection overlays
   inference.py              CLI + Python inference interface
-  demo.py                    one-command, screen-recordable end-to-end demo
+  demo.py                    one-command end-to-end demo
 tests/test_pipeline.py     smoke tests (dataset, all methods, tie-break)
 results/
   tables/                  benchmark_raw.csv, benchmark_summary.csv, benchmark_by_factor.csv
   figures/                 generated comparison plots and demo visualizations
 demo_output/                generated fresh each run of `python -m biocontext.demo` (gitignored)
 requirements.txt
-RUN_DEMO.md                 exact command sequence to record the demo video
 ```
 
 ## 4. Setup
@@ -131,16 +130,15 @@ milliseconds per image pair.
 
 ## 5. Usage
 
-### Demo mode (for recording a walkthrough video)
+### Demo mode
 
 ```bash
 python -m biocontext.demo
 ```
 
-Runs the full story end-to-end: dataset generation, reference/search
-images, baseline vs BioContext, a four-way comparison grid, and a live
-benchmark sweep. Every result is saved as a labeled PNG under
-`demo_output/`. See `RUN_DEMO.md` for the exact command sequence.
+Runs a short end-to-end demo: dataset generation, reference/search images,
+baseline vs BioContext, a four-way comparison grid, and a live benchmark
+sweep. Every result is saved as a labeled PNG under `demo_output/`.
 
 ### Run inference on your own image pair
 
@@ -247,7 +245,7 @@ Full run: `n_per_factor=10` (64 cases), success threshold 15px.
 
 ![Error by factor](results/figures/error_by_factor.png)
 
-Reading these honestly:
+Reading these:
 
 - On isolated, single-nuisance cases (scale error alone, noise alone,
   position alone, repetition alone) the classical baseline is already
@@ -321,6 +319,7 @@ deterministically. Re-running `python -m biocontext.eval.benchmark`
 regenerates identical `results/tables/benchmark_raw.csv` bit-for-bit on
 the same package versions. All dependencies and exact versions used are
 pinned as lower bounds in `requirements.txt`.
+
 
 ## 10. Team / hackathon context
 
